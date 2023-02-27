@@ -1,0 +1,4 @@
+services:
+  Upspinner\MailerBundle\Transport\UpspinnerTransportFactory:
+    tags:
+      - { name: mailer.transport_factory }

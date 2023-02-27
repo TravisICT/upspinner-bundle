@@ -1,0 +1,37 @@
+{
+  "name": "travisict/upspinner-mailer",
+  "description": "The mailer client for upspinner",
+  "type": "library",
+  "require": {
+    "php": ">=8.1.0",
+    "psr/event-dispatcher": "^1",
+    "symfony/mailer": "^5.4|^6.2",
+    "symfony/serializer": "^5.4|^6.2",
+    "symfony/dependency-injection": "^5.4|^6.2",
+    "symfony/config": "^5.4|^6.2",
+    "symfony/http-kernel": "^5.4|^6.2",
+    "symfony/uid": "^5.4|^6.2",
+    "symfony/http-client": "^4.4|^5.0|^6.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan-symfony": "1.2.x"
+  },
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Martijn van Maasakkers",
+      "email": "mvanmaasakkers@yourtravis.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Upspinner\\MailerBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Upspinner\\MailerBundle\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable"
+}
