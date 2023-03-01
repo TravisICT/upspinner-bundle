@@ -20,7 +20,6 @@ use Upspinner\MailerBundle\Email\UpspinnerEmail;
 use Upspinner\MailerBundle\Email\UpspinnerEmailAddress;
 use Upspinner\MailerBundle\Email\UpspinnerEmailAttachments;
 use Upspinner\MailerBundle\Email\UpspinnerEmailContent;
-use Upspinner\MailerBundle\Email\UpspinnerEmailPersonalization;
 
 class UpspinnerTransport extends AbstractApiTransport
 {
@@ -120,12 +119,11 @@ class UpspinnerTransport extends AbstractApiTransport
         }
 
         return new UpspinnerEmail(
-            new UpspinnerEmailPersonalization(
-                $email->getSubject() ?? '',
-                array_map($addressParser, $this->getRecipients($email, $envelope)),
-                array_map($addressParser, $email->getCc()),
-                array_map($addressParser, $email->getBcc()),
-            ),
+            $email->getSubject() ?? '',
+            new \DateTimeImmutable(),
+            array_map($addressParser, $this->getRecipients($email, $envelope)),
+            array_map($addressParser, $email->getCc()),
+            array_map($addressParser, $email->getBcc()),
             $addressParser($envelope->getSender()),
             array_map($addressParser, $email->getReplyTo()),
             $this->getContent($email),
@@ -136,19 +134,19 @@ class UpspinnerTransport extends AbstractApiTransport
 
     /**
      * @param Email $email
-     * @return array<UpspinnerEmailContent>
+     * @return UpspinnerEmailContent
      */
-    private function getContent(Email $email): array
+    private function getContent(Email $email): UpspinnerEmailContent
     {
-        $content = [];
+        $contentText = $contentHtml = '';
         if (null !== $text = $email->getTextBody()) {
-            $content[] = new UpspinnerEmailContent('text/plain', $text);
+            $contentText = (string)$text;
         }
         if (null !== $html = $email->getHtmlBody()) {
-            $content[] = new UpspinnerEmailContent('text/html', $html);
+            $contentHtml = (string)$html;
         }
 
-        return $content;
+        return new UpspinnerEmailContent($contentText, $contentHtml);
     }
 
     /**

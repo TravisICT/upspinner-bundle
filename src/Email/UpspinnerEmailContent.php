@@ -5,10 +5,10 @@ namespace Upspinner\MailerBundle\Email;
 class UpspinnerEmailContent
 {
     /**
-     * @param string $type
-     * @param string|resource $value
+     * @param string $text
+     * @param string $html
      */
-    public function __construct(public readonly string $type, public readonly mixed $value)
+    public function __construct(public readonly string $text, public readonly string $html)
     {
     }
 }
