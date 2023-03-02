@@ -1,6 +1,6 @@
 <?php
 
-namespace Upspinner\MailerBundle\Transport;
+namespace UpspinnerBundle\Transport;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Mailer\Transport\Dsn;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class UpspinnerTransportFactory extends AbstractTransportFactory
+class UpspinnerMailerTransportFactory extends AbstractTransportFactory
 {
     public function __construct(
         EventDispatcherInterface $dispatcher = null,
@@ -21,7 +21,7 @@ class UpspinnerTransportFactory extends AbstractTransportFactory
 
     public function create(Dsn $dsn): TransportInterface
     {
-        return new UpspinnerTransport(
+        return new UpspinnerMailerTransport(
             dispatcher: $this->dispatcher,
             logger: $this->logger,
             host: $dsn->getHost(),

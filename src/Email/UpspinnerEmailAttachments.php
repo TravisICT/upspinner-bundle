@@ -1,6 +1,6 @@
 <?php
 
-namespace Upspinner\MailerBundle\Email;
+namespace UpspinnerBundle\Email;
 
 class UpspinnerEmailAttachments
 {

@@ -1,6 +1,6 @@
 {
-  "name": "travisict/upspinner-mailer",
-  "description": "The mailer client for upspinner",
+  "name": "travisict/upspinner-bundle",
+  "description": "The upspinner bundle",
   "type": "library",
   "require": {
     "php": ">=8.1.0",
@@ -14,7 +14,8 @@
     "symfony/http-client": "^5.4|^6.2"
   },
   "require-dev": {
-    "phpstan/phpstan-symfony": "1.2.x"
+    "phpstan/phpstan-symfony": "1.2.x",
+    "phpunit/phpunit": "^10.0"
   },
   "license": "proprietary",
   "authors": [
@@ -25,12 +26,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Upspinner\\MailerBundle\\": "src/"
+      "UpspinnerBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Upspinner\\MailerBundle\\Tests\\": "tests/"
+      "UpspinnerBundle\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable"

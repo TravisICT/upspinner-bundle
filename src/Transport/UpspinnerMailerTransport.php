@@ -1,8 +1,7 @@
 <?php
 
-namespace Upspinner\MailerBundle\Transport;
+namespace UpspinnerBundle\Transport;
 
-use App\Service\Upspinner;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\Envelope;
@@ -16,12 +15,12 @@ use Symfony\Component\Uid\UuidV4;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use Upspinner\MailerBundle\Email\UpspinnerEmail;
-use Upspinner\MailerBundle\Email\UpspinnerEmailAddress;
-use Upspinner\MailerBundle\Email\UpspinnerEmailAttachments;
-use Upspinner\MailerBundle\Email\UpspinnerEmailContent;
+use UpspinnerBundle\Email\UpspinnerEmail;
+use UpspinnerBundle\Email\UpspinnerEmailAddress;
+use UpspinnerBundle\Email\UpspinnerEmailAttachments;
+use UpspinnerBundle\Email\UpspinnerEmailContent;
 
-class UpspinnerTransport extends AbstractApiTransport
+class UpspinnerMailerTransport extends AbstractApiTransport
 {
     private const HOST = '';
     private const PATH = '/api/incoming/emails';
@@ -93,8 +92,10 @@ class UpspinnerTransport extends AbstractApiTransport
         }
 
         $messageId = (new UuidV4())->toRfc4122();
-        if (!empty($response->getHeaders(false)['x-message-id'])) {
-            $messageId = $response->getHeaders(false)['x-message-id'][0];
+        $headers = $response->getHeaders(false);
+
+        if (!empty($headers['x-message-id'])) {
+            $messageId = $headers['x-message-id'][0];
         }
 
         $sentMessage->setMessageId($messageId);
@@ -120,7 +121,6 @@ class UpspinnerTransport extends AbstractApiTransport
 
         return new UpspinnerEmail(
             $email->getSubject() ?? '',
-            new \DateTimeImmutable(),
             array_map($addressParser, $this->getRecipients($email, $envelope)),
             array_map($addressParser, $email->getCc()),
             array_map($addressParser, $email->getBcc()),

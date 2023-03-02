@@ -1,6 +1,6 @@
 <?php
 
-namespace Upspinner\MailerBundle\Email;
+namespace UpspinnerBundle\Email;
 
 use DateTimeImmutable;
 
@@ -8,7 +8,6 @@ class UpspinnerEmail
 {
     /**
      * @param string $subject
-     * @param DateTimeImmutable $sentAt
      * @param array<UpspinnerEmailAddress> $to
      * @param array<UpspinnerEmailAddress> $cc
      * @param array<UpspinnerEmailAddress> $bcc
@@ -20,7 +19,6 @@ class UpspinnerEmail
      */
     public function __construct(
         public readonly string $subject,
-        public readonly DateTimeImmutable $sentAt,
         public readonly array $to,
         public readonly array $cc,
         public readonly array $bcc,
