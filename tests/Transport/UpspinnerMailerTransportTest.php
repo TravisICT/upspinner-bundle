@@ -40,7 +40,7 @@ class UpspinnerMailerTransportTest extends TestCase
             ->method('request')
             ->with(
                 'POST',
-                'https://localhost:8000/api/incoming/emails',
+                'https://localhost:8000/api/incoming/emails/1',
                 [
                     'json' => new UpspinnerEmail(
                         '',
@@ -64,7 +64,7 @@ class UpspinnerMailerTransportTest extends TestCase
             )
             ->willReturn($response);
 
-        $mailer = new UpspinnerMailerTransport(client: $httpClient, host: 'localhost:8000');
+        $mailer = new UpspinnerMailerTransport(client: $httpClient, host: 'localhost:8000', environmentId: '1');
         $mailer->send($email);
     }
 }

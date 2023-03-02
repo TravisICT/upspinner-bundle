@@ -25,7 +25,8 @@ class UpspinnerMailerTransportFactory extends AbstractTransportFactory
             dispatcher: $this->dispatcher,
             logger: $this->logger,
             host: $dsn->getHost(),
-            key: $dsn->getOption('key', '')
+            key: $dsn->getOption('key', ''),
+            environmentId: $dsn->getOption('environment', '')
         );
     }
 

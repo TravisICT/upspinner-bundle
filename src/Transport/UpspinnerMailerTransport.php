@@ -26,18 +26,21 @@ class UpspinnerMailerTransport extends AbstractApiTransport
     private const PATH = '/api/incoming/emails';
 
     private string $key = '';
+    private string $environmentId = '';
 
     public function __construct(
         HttpClientInterface $client = null,
         EventDispatcherInterface $dispatcher = null,
         LoggerInterface $logger = null,
         string $host = '',
-        string $key = ''
+        string $key = '',
+        string $environmentId = ''
     ) {
         parent::__construct($client, $dispatcher, $logger);
 
         $this->host = $host;
         $this->key = $key;
+        $this->environmentId = $environmentId;
     }
 
     /**
@@ -60,10 +63,14 @@ class UpspinnerMailerTransport extends AbstractApiTransport
      */
     protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
     {
-        $response = $this->client->request('POST', 'https://' . $this->getEndpoint() . self::PATH, [
-            'json' => $this->getPayload($email, $envelope),
-            'headers' => ['Authorization' => $this->key]
-        ]);
+        $response = $this->client->request(
+            'POST',
+            'https://' . $this->getEndpoint() . self::PATH . '/' . $this->environmentId,
+            [
+                'json' => $this->getPayload($email, $envelope),
+                'headers' => ['Authorization' => $this->key]
+            ]
+        );
 
         try {
             $statusCode = $response->getStatusCode();
