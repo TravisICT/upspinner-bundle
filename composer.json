@@ -26,12 +26,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "UpspinnerBundle\\": "src/"
+      "Upspinner\\ConnectBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "UpspinnerBundle\\Tests\\": "tests/"
+      "Upspinner\\ConnectBundle\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable"

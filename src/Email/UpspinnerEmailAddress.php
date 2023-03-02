@@ -1,6 +1,6 @@
 <?php
 
-namespace UpspinnerBundle\Email;
+namespace Upspinner\ConnectBundle\Email;
 
 class UpspinnerEmailAddress
 {

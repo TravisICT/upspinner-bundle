@@ -1,13 +1,13 @@
 <?php
 
-namespace UpspinnerBundle\DependencyInjection;
+namespace Upspinner\ConnectBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class UpspinnerMailerExtension extends Extension
+class UpspinnerConnectExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $containerBuilder): void
     {

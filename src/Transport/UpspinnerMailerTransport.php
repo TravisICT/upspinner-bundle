@@ -1,6 +1,6 @@
 <?php
 
-namespace UpspinnerBundle\Transport;
+namespace Upspinner\ConnectBundle\Transport;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -15,10 +15,10 @@ use Symfony\Component\Uid\UuidV4;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use UpspinnerBundle\Email\UpspinnerEmail;
-use UpspinnerBundle\Email\UpspinnerEmailAddress;
-use UpspinnerBundle\Email\UpspinnerEmailAttachments;
-use UpspinnerBundle\Email\UpspinnerEmailContent;
+use Upspinner\ConnectBundle\Email\UpspinnerEmail;
+use Upspinner\ConnectBundle\Email\UpspinnerEmailAddress;
+use Upspinner\ConnectBundle\Email\UpspinnerEmailAttachments;
+use Upspinner\ConnectBundle\Email\UpspinnerEmailContent;
 
 class UpspinnerMailerTransport extends AbstractApiTransport
 {

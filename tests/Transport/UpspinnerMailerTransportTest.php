@@ -1,16 +1,16 @@
 <?php
 
-namespace UpspinnerBundle\Tests\Transport;
+namespace Upspinner\ConnectBundle\Tests\Transport;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use UpspinnerBundle\Email\UpspinnerEmail;
-use UpspinnerBundle\Email\UpspinnerEmailAddress;
-use UpspinnerBundle\Email\UpspinnerEmailContent;
-use UpspinnerBundle\Transport\UpspinnerMailerTransport;
+use Upspinner\ConnectBundle\Email\UpspinnerEmail;
+use Upspinner\ConnectBundle\Email\UpspinnerEmailAddress;
+use Upspinner\ConnectBundle\Email\UpspinnerEmailContent;
+use Upspinner\ConnectBundle\Transport\UpspinnerMailerTransport;
 
 class UpspinnerMailerTransportTest extends TestCase
 {

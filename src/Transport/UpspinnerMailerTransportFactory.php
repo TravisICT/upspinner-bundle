@@ -1,6 +1,6 @@
 <?php
 
-namespace UpspinnerBundle\Transport;
+namespace Upspinner\ConnectBundle\Transport;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
