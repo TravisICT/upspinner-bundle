@@ -25,7 +25,7 @@ use Upspinner\ConnectBundle\Email\UpspinnerEmailContent;
 
 class UpspinnerMailerTransport extends AbstractApiTransport
 {
-    private const HOST = 'upspinner.yourtravis.com';
+    private const HOST = '';
     private const PATH = '/api/incoming/emails';
 
     private string $key = '';

@@ -17,13 +17,14 @@ class UpspinnerNotifierTransportTest extends TransportTestCase
         HttpClientInterface $client = null,
         string $from = 'from',
         string $environmentId = '721',
+        string $host = 'host.test'
     ): UpspinnerNotifierTransport {
-        return new UpspinnerNotifierTransport('authkey', $from, $environmentId, $client ?? new MockHttpClient());
+        return (new UpspinnerNotifierTransport('authkey', $from, $environmentId, $client ?? new MockHttpClient()))->setHost($host);
     }
 
     public static function toStringProvider(): iterable
     {
-        yield ['upspinner://upspinner.yourtravis.com?from=from&environment=721', self::createTransport()];
+        yield ['upspinner://host.test?from=from&environment=721', self::createTransport()];
     }
 
     public static function supportedMessagesProvider(): iterable
@@ -55,7 +56,7 @@ class UpspinnerNotifierTransportTest extends TransportTestCase
         $client = new MockHttpClient(
             function (string $method, string $url, array $options = []) use ($response): ResponseInterface {
                 $this->assertSame('POST', $method);
-                $this->assertSame('https://upspinner.yourtravis.com/api/incoming/sms/721', $url);
+                $this->assertSame('https://host.test/api/incoming/sms/721', $url);
 
                 return $response;
             }

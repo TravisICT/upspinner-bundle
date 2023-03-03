@@ -19,8 +19,8 @@ class UpspinnerMailerTransportFactoryTest extends TransportFactoryTestCase
 
     public static function supportsProvider(): iterable
     {
-        yield [Dsn::fromString('upspinner://upspinner.yourtravis.com?key=authKey&enmvironment=2'), true];
-        yield [Dsn::fromString('somethingElse://upspinner.yourtravis.com?key=authKey&enmvironment=2'), false];
+        yield [Dsn::fromString('upspinner://host.test?key=authKey&enmvironment=2'), true];
+        yield [Dsn::fromString('somethingElse://host.test?key=authKey&enmvironment=2'), false];
     }
 
     public static function createProvider(): iterable

@@ -17,7 +17,7 @@ use Upspinner\ConnectBundle\Sms\UpspinnerSms;
 
 class UpspinnerNotifierTransport extends AbstractTransport
 {
-    protected const HOST = 'upspinner.yourtravis.com';
+    protected const HOST = '';
 
     private string $key;
     private string $from;
@@ -64,7 +64,7 @@ class UpspinnerNotifierTransport extends AbstractTransport
             );
         }
 
-        $endpoint = sprintf('https://%s/api/incoming/sms/%s', 'upspinner.yourtravis.com', $this->environmentId);
+        $endpoint = sprintf('https://%s/api/incoming/sms/%s', $this->getEndpoint(), $this->environmentId);
         $response = $this->client->request('POST', $endpoint, [
             'headers' => ['Authorization' => $this->key],
             'json' => new UpspinnerSms($from, $message->getPhone(), $message->getSubject()),
