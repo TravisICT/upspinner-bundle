@@ -2,30 +2,30 @@
 
 namespace Upspinner\ConnectBundle\Transport;
 
-use Symfony\Component\Mailer\Exception\UnsupportedSchemeException;
-use Symfony\Component\Mailer\Transport\AbstractTransportFactory;
-use Symfony\Component\Mailer\Transport\Dsn;
-use Symfony\Component\Mailer\Transport\TransportInterface;
+use Symfony\Component\Notifier\Exception\UnsupportedSchemeException;
+use Symfony\Component\Notifier\Transport\AbstractTransportFactory;
+use Symfony\Component\Notifier\Transport\Dsn;
 
-class UpspinnerMailerTransportFactory extends AbstractTransportFactory
+class UpspinnerNotifierTransportFactory extends AbstractTransportFactory
 {
-    public function create(Dsn $dsn): TransportInterface
+    public function create(Dsn $dsn): UpspinnerNotifierTransport
     {
         if ('upspinner' !== $dsn->getScheme()) {
             throw new UnsupportedSchemeException($dsn, 'upspinner', $this->getSupportedSchemes());
         }
 
-        $authKey = $dsn->getOption('key', '');
-        $environment = $dsn->getOption('environment', '');
+        $authKey = $this->getPassword($dsn);
+        $from = $dsn->getRequiredOption('from');
+        $environment = $dsn->getRequiredOption('environment');
         $host = 'default' === $dsn->getHost() ? null : $dsn->getHost();
         $port = $dsn->getPort();
 
-        return (new UpspinnerMailerTransport(
+        return (new UpspinnerNotifierTransport(
+            key: $authKey,
+            from: $from,
+            environmentId: $environment,
             client: $this->client,
             dispatcher: $this->dispatcher,
-            logger: $this->logger,
-            key: $authKey,
-            environmentId: $environment
         ))
             ->setHost($host)
             ->setPort($port);

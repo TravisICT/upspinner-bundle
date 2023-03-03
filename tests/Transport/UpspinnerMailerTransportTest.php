@@ -14,7 +14,7 @@ use Upspinner\ConnectBundle\Transport\UpspinnerMailerTransport;
 
 class UpspinnerMailerTransportTest extends TestCase
 {
-    function testSend(): void
+    public function testSend(): void
     {
         $email = new Email();
         $email->from(new Address('foo@example.com', 'Ms. Foo Bar'))
@@ -64,7 +64,7 @@ class UpspinnerMailerTransportTest extends TestCase
             )
             ->willReturn($response);
 
-        $mailer = new UpspinnerMailerTransport(client: $httpClient, host: 'localhost:8000', environmentId: '1');
+        $mailer = (new UpspinnerMailerTransport(client: $httpClient, environmentId: '1'))->setHost('localhost:8000');
         $mailer->send($email);
     }
 }

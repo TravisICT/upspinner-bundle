@@ -11,11 +11,13 @@
     "symfony/config": "^5.4|^6.2",
     "symfony/http-kernel": "^5.4|^6.2",
     "symfony/uid": "^5.4|^6.2",
-    "symfony/http-client": "^5.4|^6.2"
+    "symfony/http-client": "^5.4|^6.2",
+    "symfony/notifier": "^5.4|^6.2"
   },
   "require-dev": {
     "phpstan/phpstan-symfony": "1.2.x",
-    "phpunit/phpunit": "^10.0"
+    "phpunit/phpunit": "^10.0",
+    "squizlabs/php_codesniffer": "*"
   },
   "license": "proprietary",
   "authors": [
@@ -33,6 +35,13 @@
     "psr-4": {
       "Upspinner\\ConnectBundle\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": [
+      "phpcs",
+      "phpstan --xdebug",
+      "phpunit"
+    ]
   },
   "minimum-stability": "stable"
 }

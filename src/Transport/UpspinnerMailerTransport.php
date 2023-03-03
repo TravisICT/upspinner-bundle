@@ -12,7 +12,10 @@ use Symfony\Component\Mailer\Transport\AbstractApiTransport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Uid\UuidV4;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Upspinner\ConnectBundle\Email\UpspinnerEmail;
@@ -22,7 +25,7 @@ use Upspinner\ConnectBundle\Email\UpspinnerEmailContent;
 
 class UpspinnerMailerTransport extends AbstractApiTransport
 {
-    private const HOST = '';
+    private const HOST = 'upspinner.yourtravis.com';
     private const PATH = '/api/incoming/emails';
 
     private string $key = '';
@@ -32,13 +35,11 @@ class UpspinnerMailerTransport extends AbstractApiTransport
         HttpClientInterface $client = null,
         EventDispatcherInterface $dispatcher = null,
         LoggerInterface $logger = null,
-        string $host = '',
         string $key = '',
         string $environmentId = ''
     ) {
         parent::__construct($client, $dispatcher, $logger);
 
-        $this->host = $host;
         $this->key = $key;
         $this->environmentId = $environmentId;
     }
@@ -56,9 +57,9 @@ class UpspinnerMailerTransport extends AbstractApiTransport
      * @param Email $email
      * @param Envelope $envelope
      * @return ResponseInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
@@ -86,7 +87,8 @@ class UpspinnerMailerTransport extends AbstractApiTransport
                     'Unable to send an email: ' . implode('; ', array_column($result['errors'], 'message')) . sprintf(
                         ' (code %d).',
                         $statusCode
-                    ), $response
+                    ),
+                    $response
                 );
             } catch (DecodingExceptionInterface $e) {
                 throw new HttpTransportException(

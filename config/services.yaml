@@ -2,3 +2,10 @@ services:
   Upspinner\ConnectBundle\Transport\UpspinnerMailerTransportFactory:
     tags:
       - { name: mailer.transport_factory }
+
+  Upspinner\ConnectBundle\Transport\UpspinnerNotifierTransportFactory:
+    parent:
+      - { name: notifier.transport_factory.abstract }
+    tags:
+      - { name: texter.transport_factory }
+
