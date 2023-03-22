@@ -79,7 +79,7 @@ class UpspinnerMailerTransport extends AbstractApiTransport
             throw new HttpTransportException('Could not reach the remote Upspinner server.', $response, 0, $e);
         }
 
-        if (200 !== $statusCode) {
+        if (201 !== $statusCode) {
             try {
                 $result = $response->toArray(false);
 

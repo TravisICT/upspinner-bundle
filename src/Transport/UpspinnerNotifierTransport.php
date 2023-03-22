@@ -76,7 +76,7 @@ class UpspinnerNotifierTransport extends AbstractTransport
             throw new TransportException('Could not reach the remote Upspinner server.', $response, 0, $e);
         }
 
-        if (200 !== $statusCode) {
+        if (201 !== $statusCode) {
             $error = $response->toArray(false);
 
             throw new TransportException(
