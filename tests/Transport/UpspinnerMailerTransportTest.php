@@ -27,7 +27,7 @@ class UpspinnerMailerTransportTest extends TestCase
         $response
             ->expects($this->once())
             ->method('getStatusCode')
-            ->willReturn(200);
+            ->willReturn(201);
         $response
             ->expects($this->once())
             ->method('getHeaders')

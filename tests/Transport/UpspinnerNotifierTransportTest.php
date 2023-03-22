@@ -48,7 +48,7 @@ class UpspinnerNotifierTransportTest extends TransportTestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->exactly(2))
             ->method('getStatusCode')
-            ->willReturn(200);
+            ->willReturn(201);
         $response->expects($this->once())
             ->method('getContent')
             ->willReturn(json_encode(null, JSON_THROW_ON_ERROR));
