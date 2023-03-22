@@ -4,8 +4,7 @@ services:
       - { name: mailer.transport_factory }
 
   Upspinner\ConnectBundle\Transport\UpspinnerNotifierTransportFactory:
-    parent:
-      - { name: notifier.transport_factory.abstract }
+    parent: notifier.transport_factory.abstract
     tags:
       - { name: texter.transport_factory }
 
