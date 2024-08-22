@@ -2,6 +2,7 @@
 
 namespace Upspinner\ConnectBundle\Transport;
 
+use http\Exception\RuntimeException;
 use Symfony\Component\Notifier\Exception\InvalidArgumentException;
 use Symfony\Component\Notifier\Exception\TransportException;
 use Symfony\Component\Notifier\Exception\UnsupportedMessageTypeException;
@@ -49,6 +50,10 @@ class UpspinnerNotifierTransport extends AbstractTransport
 
     protected function doSend(MessageInterface $message): SentMessage
     {
+        if (is_null($this->client)) {
+            throw new RuntimeException('HTTP Client not instantiated');
+        }
+
         if (!$message instanceof SmsMessage) {
             throw new UnsupportedMessageTypeException(__CLASS__, SmsMessage::class, $message);
         }

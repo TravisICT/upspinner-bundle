@@ -15,7 +15,9 @@ class UpspinnerNotifierTransportFactory extends AbstractTransportFactory
         }
 
         $authKey = $this->getPassword($dsn);
+        /** @var string $from */
         $from = $dsn->getRequiredOption('from');
+        /** @var string $environment */
         $environment = $dsn->getRequiredOption('environment');
         $host = 'default' === $dsn->getHost() ? null : $dsn->getHost();
         $port = $dsn->getPort();

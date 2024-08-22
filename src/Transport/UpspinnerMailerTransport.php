@@ -2,6 +2,7 @@
 
 namespace Upspinner\ConnectBundle\Transport;
 
+use http\Exception\RuntimeException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\Envelope;
@@ -64,6 +65,9 @@ class UpspinnerMailerTransport extends AbstractApiTransport
      */
     protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
     {
+        if (is_null($this->client)) {
+            throw new RuntimeException('HTTP Client not instantiated');
+        }
         $response = $this->client->request(
             'POST',
             'https://' . $this->getEndpoint() . self::PATH . '/' . $this->environmentId,
@@ -168,6 +172,7 @@ class UpspinnerMailerTransport extends AbstractApiTransport
         foreach ($email->getAttachments() as $attachment) {
             $headers = $attachment->getPreparedHeaders();
             $filename = $headers->getHeaderParameter('Content-Disposition', 'filename') ?? '';
+            /** @var string $disposition */
             $disposition = $headers->getHeaderBody('Content-Disposition');
             $contentId = '';
 

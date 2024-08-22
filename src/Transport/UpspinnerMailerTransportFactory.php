@@ -15,7 +15,9 @@ class UpspinnerMailerTransportFactory extends AbstractTransportFactory
             throw new UnsupportedSchemeException($dsn, 'upspinner', $this->getSupportedSchemes());
         }
 
+        /** @var string $authKey */
         $authKey = $dsn->getOption('key', '');
+        /** @var string $environment */
         $environment = $dsn->getOption('environment', '');
         $host = 'default' === $dsn->getHost() ? null : $dsn->getHost();
         $port = $dsn->getPort();
