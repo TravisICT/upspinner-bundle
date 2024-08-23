@@ -40,4 +40,9 @@ class UpspinnerMailerTransportFactoryTest extends TransportFactoryTestCase
             'The "upspinner+foo" scheme is not supported; supported schemes for mailer "upspinner" are: "upspinner".',
         ];
     }
+
+    public static function incompleteDsnProvider(): iterable
+    {
+        yield [new Dsn('', '')];
+    }
 }

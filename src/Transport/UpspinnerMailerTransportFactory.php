@@ -2,6 +2,7 @@
 
 namespace Upspinner\ConnectBundle\Transport;
 
+use Symfony\Component\Mailer\Exception\IncompleteDsnException;
 use Symfony\Component\Mailer\Exception\UnsupportedSchemeException;
 use Symfony\Component\Mailer\Transport\AbstractTransportFactory;
 use Symfony\Component\Mailer\Transport\Dsn;
@@ -11,6 +12,10 @@ class UpspinnerMailerTransportFactory extends AbstractTransportFactory
 {
     public function create(Dsn $dsn): TransportInterface
     {
+        if ('' === $dsn->getScheme()) {
+            throw new IncompleteDsnException('Scheme cannot be empty');
+        }
+
         if ('upspinner' !== $dsn->getScheme()) {
             throw new UnsupportedSchemeException($dsn, 'upspinner', $this->getSupportedSchemes());
         }

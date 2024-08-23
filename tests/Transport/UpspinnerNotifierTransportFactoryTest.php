@@ -36,4 +36,9 @@ class UpspinnerNotifierTransportFactoryTest extends TransportFactoryTestCase
     {
         yield 'missing option: from' => ['upspinner://:authKey@default'];
     }
+
+    public static function incompleteDsnProvider(): iterable
+    {
+        yield 'missing option: from' => ['upspinner://:authKey@default'];
+    }
 }
